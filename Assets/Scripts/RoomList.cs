@@ -55,32 +55,22 @@ public class RoomList : MonoBehaviourPunCallbacks
     {
         base.OnRoomListUpdate(roomList);
 
-        if(cachedRoomList.Count <= 0)
+        foreach (var room in roomList)
         {
-            cachedRoomList = roomList;
-        }
-        else
-        {
-            foreach(var room in roomList)
+            int existingIndex = cachedRoomList.FindIndex(r => r.Name == room.Name);
+
+            if (room.RemovedFromList)
             {
-                for(int i = 0; i < cachedRoomList.Count; i++)
-                {
-                    if(cachedRoomList[i].Name == room.Name)
-                    {
-                        List<RoomInfo> newList = cachedRoomList;
-
-                        if(room.RemovedFromList)
-                        {
-                            newList.Remove(newList[i]);
-                        }
-                        else
-                        {
-                            newList[i] = room;
-                        }
-
-                        cachedRoomList = newList;
-                    }
-                }
+                // 방이 사라짐 (닫히거나 꽉 참) → 목록에 있으면 제거
+                if (existingIndex != -1)
+                    cachedRoomList.RemoveAt(existingIndex);
+            }
+            else
+            {
+                if (existingIndex != -1)
+                    cachedRoomList[existingIndex] = room; // 기존 방 정보 갱신
+                else
+                    cachedRoomList.Add(room); // 새로 생긴 방 → 추가! (이 부분이 원래 빠져있었음)
             }
         }
 
