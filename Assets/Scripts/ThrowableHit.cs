@@ -2,7 +2,7 @@ using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using UnityEngine;
 
-public class SpatulaHit : MonoBehaviourPun
+public class ThrowableHit : MonoBehaviourPun
 {
     public int damage = 20;
     public bool hasHit = false; // 중복 판정 방지

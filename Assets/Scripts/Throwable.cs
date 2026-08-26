@@ -1,18 +1,28 @@
-using System;
+using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.XR;
 
-public class Spatula : MonoBehaviourPun
+public class Throwable : MonoBehaviourPun
 {
+    [Header("Object")]
     public Camera camera;
     public GameObject hand;
 
-    public GameObject spatulaPrefab; // Resources 폴더 기준 이름
+    [Header("THrowables Prefab")]
+    GameObject currentPrefab;
+    public List<GameObject> ThrowablePrefabs;
+
+    [Header("Value")]
     public Transform throwPoint; // 무기가 나갈 위치 (보통 손이나 카메라 앞)
     public float throwForce = 15f;
     public float rotationSpeed = 10f;
-    
+    int upgradingLevel = RoomManager.instance.upgradingLevel;
+
+    void Update()
+    {
+        currentPrefab = ThrowablePrefabs[upgradingLevel - 1];
+    }
+
     public void ThrowWeapon()
     {
         // 자신의 캐릭터에서만 실행되도록 체크 (다른 플레이어 입력 방지)
@@ -22,26 +32,24 @@ public class Spatula : MonoBehaviourPun
         Quaternion spawnRot = Quaternion.LookRotation(transform.forward);
 
         // 네트워크에 생성 요청 (모든 클라이언트에 자동 동기화)
-        GameObject spatula = PhotonNetwork.Instantiate(spatulaPrefab.name, spawnPos, spawnRot);
-
-        SpatulaHit hit = spatula.GetComponent<SpatulaHit>();
+        GameObject currentThrowable = PhotonNetwork.Instantiate(currentPrefab.name, spawnPos, spawnRot);
 
         // 생성된 무기에 힘을 가해 날리기
-        Rigidbody rb = spatula.GetComponent<Rigidbody>();
+        Rigidbody rb = currentThrowable.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.angularVelocity = spatula.transform.right * rotationSpeed; 
+            rb.angularVelocity = currentThrowable.transform.right * rotationSpeed; 
             rb.AddForce(camera.transform.forward * throwForce, ForceMode.VelocityChange);
         }
     }
 
+    [Header("ThrowForce Control")]
     [SerializeField] private Vector3 localOffset = new Vector3(0, 0, 1f); // 카메라 기준 원하는 위치
     [SerializeField] private Vector3 localEulerOffset = Vector3.zero;      // 카메라 기준 원하는 회전
     [SerializeField] private float rotateSpeed = 0.75f;
     [SerializeField] private float maxAngle = 45f;
 
     private float currentAngle = 0f;
-
  
     void LateUpdate() // 카메라가 이번 프레임에 회전을 끝낸 뒤에 실행됨
     {
