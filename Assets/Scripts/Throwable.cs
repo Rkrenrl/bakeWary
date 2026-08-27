@@ -16,11 +16,17 @@ public class Throwable : MonoBehaviourPun
     public Transform throwPoint; // 무기가 나갈 위치 (보통 손이나 카메라 앞)
     public float throwForce = 15f;
     public float rotationSpeed = 10f;
-    int upgradingLevel = RoomManager.instance.upgradingLevel;
 
     void Update()
     {
-        currentPrefab = ThrowablePrefabs[upgradingLevel - 1];
+        int upgradingLevel = RoomManager.instance.upgradingLevel;
+
+        int index = Mathf.Clamp(upgradingLevel - 1, 0, 4);
+        currentPrefab = ThrowablePrefabs[index];
+        
+        transform.GetChild(index - 1).gameObject.SetActive(true);
+        if(index > 1)
+            transform.GetChild(index - 2).gameObject.SetActive(false);
     }
 
     public void ThrowWeapon()

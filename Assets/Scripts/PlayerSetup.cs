@@ -34,6 +34,13 @@ public class PlayerSetup : MonoBehaviour
         }
 
         TPweaponHolder.GetChild(_weaponIndex).gameObject.SetActive(true);
+        if(_weaponIndex == 0)
+        {
+            int index = Mathf.Clamp(RoomManager.instance.upgradingLevel - 1, 0, 4);
+            TPweaponHolder.GetChild(_weaponIndex).GetChild(index - 1).gameObject.SetActive(true);
+            if(index > 1)
+                TPweaponHolder.GetChild(_weaponIndex).GetChild(index - 2).gameObject.SetActive(false);
+        }
     }
 
     [PunRPC]
