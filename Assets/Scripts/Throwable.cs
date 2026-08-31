@@ -19,14 +19,20 @@ public class Throwable : MonoBehaviourPun
 
     void Update()
     {
-        int upgradingLevel = RoomManager.instance.upgradingLevel;
+        int upgradingLevel = 1;
 
-        int index = Mathf.Clamp(upgradingLevel - 1, 0, 4);
+        if (photonView.Owner != null && photonView.Owner.CustomProperties.ContainsKey("upgradingLevel"))
+        {
+            upgradingLevel = (int)photonView.Owner.CustomProperties["upgradingLevel"];
+        }
+
+        int index = Mathf.Clamp(upgradingLevel - 1, 0, ThrowablePrefabs.Count - 1);
         currentPrefab = ThrowablePrefabs[index];
-        
-        transform.GetChild(index - 1).gameObject.SetActive(true);
-        if(index > 1)
-            transform.GetChild(index - 2).gameObject.SetActive(false);
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(i == index);
+        }
     }
 
     public void ThrowWeapon()

@@ -7,7 +7,7 @@ using UnityEngine;
 public class WeaponSwitcher : MonoBehaviour
 {
     public PhotonView playerSetupView;
-    int selectedWeapon = 0;
+    public int selectedWeapon = 0;
 
     void Start()
     {
@@ -77,7 +77,7 @@ public class WeaponSwitcher : MonoBehaviour
 
     void SelectWeapon()
     {
-        playerSetupView.RPC("SetTPWeapon", RpcTarget.All, selectedWeapon);
+        playerSetupView.RPC("SetTPWeapon", RpcTarget.AllBuffered, selectedWeapon);
         Movement movement = gameObject.transform.root.GetComponent<Movement>();
 
         if(selectedWeapon >= transform.childCount)

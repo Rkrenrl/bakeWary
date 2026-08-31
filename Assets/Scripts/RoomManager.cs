@@ -54,6 +54,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
         SpawnPlayer();
     }
 
+    public GameObject localPlayerInstance;
+
     public void SpawnPlayer()
     {
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
@@ -64,9 +66,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
         _player.GetComponent<PhotonView>().RPC("SetNickname", RpcTarget.AllBuffered, nickname);
         PhotonNetwork.LocalPlayer.NickName = nickname;
+
+        localPlayerInstance = _player; // 추가
     }
 
-    // XP 증가 + 레벨업 체크를 한 곳에서 처리 (다음 Update를 기다릴 필요 없이 즉시 반영)
     public void AddUpgradingXP(float _amount)
     {
         upgradingXP += _amount;
@@ -76,7 +79,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
             upgradingXP -= upgradeRequireXP;
             upgradingLevel++;
             upgradeRequireXP *= 1.5f;
-            SetHashes();
+            SetHashes(); // 이것만 있으면 됨. 모든 클라이언트에 자동으로 전파됨
         }
     }
 
