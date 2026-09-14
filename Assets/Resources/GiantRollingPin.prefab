@@ -1,0 +1,143 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7639103527839731333
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: fab2faa5ead753c4fb117b26e21c78ff, type: 2}
+    - target: {fileID: 919132149155446097, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+      propertyPath: m_Name
+      value: GiantRollingPin
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1953782217614888710}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3252882748103511069}
+  m_SourcePrefab: {fileID: 100100000, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+--- !u!1 &7404733619511440340 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+  m_PrefabInstance: {fileID: 7639103527839731333}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-1953782217614888710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7404733619511440340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonView
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &3252882748103511069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7404733619511440340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aeffb1df7281b34296d0bcfc27904e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RollingPinRoll
+  rollVisual: {fileID: 7892898449017760110}
+  radius: 1.5
+  speed: 12
+  maxBounces: 5
+  maxDistance: 100
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 8
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 128
+  gravity: 25
+  baseDamage: 100
+  damageFalloffPerDistance: 1.2
+  minDamage: 30
+  hitRadius: 2
+  breakVFX: {fileID: 2353600328335836179, guid: ceec7516237b4104b94300043ca39784, type: 3}
+  landVFX: {fileID: 0}
+--- !u!4 &7892898449017760110 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7df7cad04022c6348b95ee18a8a9991b, type: 3}
+  m_PrefabInstance: {fileID: 7639103527839731333}
+  m_PrefabAsset: {fileID: 0}

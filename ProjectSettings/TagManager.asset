@@ -6,15 +6,16 @@ TagManager:
   tags:
   - Ground
   - Wall
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Wall
   - Water
   - UI
   - Hand
-  - 
+  - Ground
   - 
   - 
   - 

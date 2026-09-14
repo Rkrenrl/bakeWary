@@ -23,7 +23,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public int kills = 0;
     [HideInInspector]
     public int deaths = 0;
-    [HideInInspector]
+    [Space]
     public int upgradingLevel = 1;
 
     // 리스폰과 무관하게 유지되어야 하는 값이라 여기로 이동
