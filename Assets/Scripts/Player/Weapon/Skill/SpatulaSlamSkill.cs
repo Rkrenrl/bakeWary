@@ -21,7 +21,7 @@ public class SpatulaSlamSkill : MonoBehaviourPun
 
         if (cooldownTimer > 0f) cooldownTimer -= Time.deltaTime;
 
-        if (cooldownBar != null && CanUseSkill())
+        if (cooldownBar != null && IsSkillRelevant())
             cooldownBar.fillAmount = 1f - Mathf.Clamp01(cooldownTimer / cooldown);
 
         if (Input.GetKeyDown(KeyCode.Q) && cooldownTimer <= 0f && CanUseSkill())
@@ -30,6 +30,13 @@ public class SpatulaSlamSkill : MonoBehaviourPun
         }
     }
 
+    // 지금 내 레벨이 이 스킬 차례인가 (무기를 들고 있는지는 무관)
+    bool IsSkillRelevant()
+    {
+        return RoomManager.instance.upgradingLevel == 1;
+    }
+
+    // 실제로 Q키로 발동 가능한가 (무기를 들고 있어야 함)
     bool CanUseSkill()
     {
         if (weaponSwitcher == null || weaponSwitcher.selectedWeapon != throwableSlotIndex)

@@ -22,7 +22,7 @@ public class RollingPinRollSkill : MonoBehaviourPun
 
         if (cooldownTimer > 0f) cooldownTimer -= Time.deltaTime;
 
-        if (cooldownBar != null && CanUseSkill())
+        if (cooldownBar != null && IsSkillRelevant())
             cooldownBar.fillAmount = 1f - Mathf.Clamp01(cooldownTimer / cooldown);
 
         if (Input.GetKeyDown(KeyCode.Q) && cooldownTimer <= 0f && CanUseSkill())
@@ -31,11 +31,16 @@ public class RollingPinRollSkill : MonoBehaviourPun
         }
     }
 
+    bool IsSkillRelevant()
+    {
+        return RoomManager.instance.upgradingLevel == 2;
+    }
+
     bool CanUseSkill()
     {
         if (weaponSwitcher == null || weaponSwitcher.selectedWeapon != throwableSlotIndex)
             return false;
-        if (RoomManager.instance.upgradingLevel != 2) // 밀대는 레벨 2
+        if (RoomManager.instance.upgradingLevel != 2)
             return false;
         return true;
     }

@@ -10,6 +10,8 @@ public class RollingPinRoll : MonoBehaviourPun
     [Header("Visual")]
     public Transform rollVisual;
     public float radius = 1.5f;
+    public Vector3 modelRestEuler; // 모델 자체를 눕히기 위한 고정 보정 회전 (에디터에서 직접 맞춤)
+    public Vector3 spinAxisLocal = Vector3.right; // 실제로 구르는 축 (보정 후 기준)
 
     [Header("Movement")]
     public float speed = 12f;
@@ -35,10 +37,12 @@ public class RollingPinRoll : MonoBehaviourPun
     private float distanceTraveled = 0f;
     private int bounceCount = 0;
     private HashSet<int> hitPlayers = new HashSet<int>();
+    private float spinAngle = 0f; // 추가: 누적 구름 각도
 
     private RollState state;
     private float fallVelocity = 0f;
     private float restY; // 바닥에 얹혔을 때의 목표 Y좌표
+
 
     void Start()
     {
@@ -122,11 +126,15 @@ public class RollingPinRoll : MonoBehaviourPun
         transform.position += direction * moveStep;
         distanceTraveled += moveStep;
 
+        // 구르는 연출: 누적 회전 대신 매 프레임 절대값으로 새로 계산
         if (rollVisual != null)
         {
-            Vector3 rollAxis = Vector3.Cross(Vector3.up, direction);
-            float angle = (moveStep / radius) * Mathf.Rad2Deg;
-            rollVisual.Rotate(rollAxis, angle, Space.World);
+            spinAngle += (moveStep / radius) * Mathf.Rad2Deg;
+
+            Quaternion facingRot = Quaternion.LookRotation(direction, Vector3.up);
+            Quaternion restOffset = Quaternion.Euler(modelRestEuler);
+
+            rollVisual.rotation = facingRot * restOffset * Quaternion.AngleAxis(spinAngle, spinAxisLocal);
         }
 
         CheckPlayerHit();
