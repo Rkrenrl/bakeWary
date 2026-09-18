@@ -32,7 +32,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [HideInInspector]
     public float upgradeRequireXP = 100;
 
-    public string roomNameToJoin = "test";
+    public string roomNameToJoin = "Unnamed";
 
     void Awake()
     {

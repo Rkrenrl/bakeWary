@@ -41,7 +41,7 @@ public class Health : MonoBehaviour
                 RoomManager.instance.SetHashes();
             }
 
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 }

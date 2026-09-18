@@ -1,7 +1,4 @@
-using ExitGames.Client.Photon.StructWrapping;
 using Photon.Pun;
-using Photon.Realtime;
-using UnityEditor;
 using UnityEngine;
 
 public class WeaponSwitcher : MonoBehaviour
