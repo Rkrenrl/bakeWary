@@ -47,6 +47,8 @@ MonoBehaviour:
   - PlayKnifeSFX_RPC
   - PlayKnifeDrawSFX_RPC
   - SetFloatVFX
+  - SetBuff
+  - SetTornadoVFX
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

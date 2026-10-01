@@ -34,6 +34,10 @@ public class Movement : MonoBehaviour
     public Image floatingGuageBar;
 
     private bool floating;
+    public bool IsFloating => floating; // 추가
+
+    private PlayerBuff buff; // 추가
+
     private bool wasFloating = false; // 상태 변화 감지용
 
     [Header("Float VFX")]
@@ -52,6 +56,7 @@ public class Movement : MonoBehaviour
         currentGauge = maxGauge;
         pv = GetComponent<PhotonView>();
         if (pv == null) pv = GetComponentInParent<PhotonView>();
+        buff = GetComponent<PlayerBuff>(); // 추가
     }
 
     void Update()
@@ -102,11 +107,15 @@ public class Movement : MonoBehaviour
 
         if (floating)
         {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, floatSpeed, rb.linearVelocity.z);
+            float fSpeed = floatSpeed;
+            if (buff != null && buff.IsBuffed) fSpeed *= buff.floatSpeedMultiplier;
+
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, fSpeed, rb.linearVelocity.z);
 
             if (input.magnitude > 0.5f)
             {
                 float speed = (sprinting ? sprintSpeed : walkSpeed) * floatSpeedMultiplier;
+                if (buff != null && buff.IsBuffed) speed *= buff.speedMultiplier;
                 rb.AddForce(CalculateMovement(speed), ForceMode.VelocityChange);
             }
 
@@ -125,8 +134,11 @@ public class Movement : MonoBehaviour
                 handAnimation.clip = handWalkAnimation;
                 if(Input.GetMouseButton(0)) handAnimation.Stop();
                 else handAnimation.Play();
-                
-                rb.AddForce(CalculateMovement(sprinting ? sprintSpeed : walkSpeed), ForceMode.VelocityChange);   
+
+                float speed = sprinting ? sprintSpeed : walkSpeed;
+                if (buff != null && buff.IsBuffed) speed *= buff.speedMultiplier;
+
+                rb.AddForce(CalculateMovement(speed), ForceMode.VelocityChange);
             }
             else
             {

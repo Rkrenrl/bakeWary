@@ -65,7 +65,7 @@ MonoBehaviour:
   minDamage: 30
   hitRadius: 4
   breakVFX: {fileID: 2353600328335836179, guid: ceec7516237b4104b94300043ca39784, type: 3}
-  landVFX: {fileID: 0}
+  landVFX: {fileID: 3432958286849152088, guid: 87ee7299dd44ed747af24dbb91bcd33b, type: 3}
 --- !u!114 &1953421307150371516
 MonoBehaviour:
   m_ObjectHideFlags: 0

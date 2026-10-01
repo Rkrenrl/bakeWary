@@ -10,6 +10,73 @@ public class ThrowableHit : MonoBehaviourPun
     [Header("VFX")]
     public GameObject hitVFX;
 
+    [Header("Homing (버프 시)")]
+    public GameObject homingVFX;      // 작은 소용돌이 (프리팹 자식, 기본 꺼둠)
+    public float homingRange = 12f;   // 이 거리 안에 들어오면 추적 시작
+    public float homingStrength = 2.5f; // 추적 강도 (낮을수록 약하게 휘어짐)
+
+    private bool isHoming = false;
+    private Rigidbody rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+
+        object[] data = photonView.InstantiationData;
+        if (data != null && data.Length > 0)
+            isHoming = (bool)data[0];
+
+        if (homingVFX != null) homingVFX.SetActive(isHoming);
+    }
+
+    void Update()
+    {
+        if(gameObject.transform.position.y < -5)
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (!isHoming || rb == null) return;
+        if (!photonView.IsMine) return;
+
+        Transform target = FindNearestEnemy();
+        if (target == null) return;
+
+        Vector3 toTarget = (target.position - transform.position).normalized;
+        Vector3 newDir = Vector3.Slerp(rb.linearVelocity.normalized, toTarget, homingStrength * Time.fixedDeltaTime);
+
+        rb.linearVelocity = newDir * rb.linearVelocity.magnitude; // 속도 크기는 유지, 방향만 살짝 보정
+    }
+
+    Transform FindNearestEnemy()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, homingRange);
+        Transform nearest = null;
+        float minDist = float.MaxValue;
+
+        foreach (var col in hits)
+        {
+            if (!col.CompareTag("Player")) continue;
+
+            PhotonView otherView = col.GetComponent<PhotonView>();
+            if (otherView == null) continue;
+            if (otherView.Owner.ActorNumber == photonView.Owner.ActorNumber) continue;
+
+            float dist = Vector3.Distance(transform.position, col.transform.position);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                nearest = col.transform;
+            }
+        }
+
+        return nearest;
+    }
+
+
     void OnTriggerEnter(Collider other)
     {
         if (!photonView.IsMine) return;

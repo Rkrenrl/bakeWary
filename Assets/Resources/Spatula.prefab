@@ -190,6 +190,9 @@ MonoBehaviour:
   damage: 20
   hasHit: 0
   hitVFX: {fileID: 2708598583397607911, guid: 6398d43fe79ea0140913dc5530c646af, type: 3}
+  homingVFX: {fileID: 0}
+  homingRange: 12
+  homingStrength: 2.5
 --- !u!65 &8696018899824080053
 BoxCollider:
   m_ObjectHideFlags: 0

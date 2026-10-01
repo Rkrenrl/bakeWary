@@ -2667,6 +2667,8 @@ GameObject:
   - component: {fileID: 8420283282820917016}
   - component: {fileID: 8602468562639562445}
   - component: {fileID: 14392838722710670}
+  - component: {fileID: 1837175903269431715}
+  - component: {fileID: 4120803049972418644}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2691,6 +2693,7 @@ Transform:
   - {fileID: 2691994845668293578}
   - {fileID: 9208426693279651263}
   - {fileID: 4995428111898283325}
+  - {fileID: 9052194932450359000}
   - {fileID: 9211093466479431017}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3016,6 +3019,50 @@ MonoBehaviour:
   cooldown: 25
   spawnBackOffset: 2
   spawnHeight: 1.5
+  weaponSwitcher: {fileID: 8928383821592184845}
+  throwableSlotIndex: 0
+  cooldownBar: {fileID: 444937347890314501}
+--- !u!114 &1837175903269431715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8909252401780923478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 735aeafa2c038414abdc168cfebfe650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerBuff
+  duration: 15
+  damageReduction: 0.3
+  speedMultiplier: 1.4
+  floatSpeedMultiplier: 1.5
+  auraVFX: {fileID: 9052194932450359015}
+  tornadoVFX: {fileID: 7966731087305637596, guid: fcc4bd952eecdb24e82058e4370515d1, type: 3}
+  tornadoRadius: 10
+  tornadoTickDamage: 3
+  tornadoTickInterval: 0.5
+  tornadoGroundY: 0
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!114 &4120803049972418644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8909252401780923478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55f6e2aab5874544971737df3d892d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WhiskBuffSkill
+  whiskMotionPrefab: {fileID: 6455164308789196222, guid: 10df07d2429de624baca4de6df1f14c4, type: 3}
+  cooldown: 40
+  castTime: 1.2
+  spawnHeight: 3
   weaponSwitcher: {fileID: 8928383821592184845}
   throwableSlotIndex: 0
   cooldownBar: {fileID: 444937347890314501}
@@ -4287,6 +4334,81 @@ Animation:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 596e9421cd9578347a5fa75bcda2a506, type: 3}
   m_PrefabInstance: {fileID: 5569484995569438607}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5771756074165452714
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6467873923408623846}
+    m_Modifications:
+    - target: {fileID: 3280519133390621005, guid: 11b170cd9da46b34eb3b32b9a7b0b547, type: 3}
+      propertyPath: m_Name
+      value: CFXR3 Magic Aura A (Runic)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280519133390621005, guid: 11b170cd9da46b34eb3b32b9a7b0b547, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280519133390621042, guid: 11b170cd9da46b34eb3b32b9a7b0b547, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280519133390621042, guid: 11b170cd9da46b34eb3b32b9a7b0b547, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280519133390621042, guid: 11b170cd9da46b34eb3b32b9a7b0b547, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280519133390621042, guid: 11b170cd9da46b34eb3b32b9a7b0b547, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280519133390621042, guid: 11b170cd9da46b34eb3b32b9a7b0b547, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280519133390621042, guid: 11b170cd9da46b34eb3b32b9a7b0b547, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280519133390621042, guid: 11b170cd9da46b34eb3b32b9a7b0b547, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280519133390621042, guid: 11b170cd9da46b34eb3b32b9a7b0b547, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280519133390621042, guid: 11b170cd9da46b34eb3b32b9a7b0b547, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280519133390621042, guid: 11b170cd9da46b34eb3b32b9a7b0b547, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3280519133430969737, guid: 11b170cd9da46b34eb3b32b9a7b0b547, type: 3}
+      propertyPath: m_Intensity
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 11b170cd9da46b34eb3b32b9a7b0b547, type: 3}
+--- !u!4 &9052194932450359000 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3280519133390621042, guid: 11b170cd9da46b34eb3b32b9a7b0b547, type: 3}
+  m_PrefabInstance: {fileID: 5771756074165452714}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9052194932450359015 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3280519133390621005, guid: 11b170cd9da46b34eb3b32b9a7b0b547, type: 3}
+  m_PrefabInstance: {fileID: 5771756074165452714}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8540027031849137446
 PrefabInstance:

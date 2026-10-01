@@ -25,18 +25,22 @@ public class Health : MonoBehaviour
     [PunRPC]
     public void TakeDamage(int _damage)
     {
+        PlayerBuff buff = GetComponent<PlayerBuff>();
+        if (buff != null && buff.IsBuffed)
+            _damage = Mathf.RoundToInt(_damage * (1f - buff.damageReduction));
+
         health -= _damage;
 
         gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
         healthText.text = health.ToString();
+        healthBar.fillAmount = (float)health / 100;
 
-        if(health <= 0)
+        if (health <= 0)
         {
-            if(isLocalPlayer)
+            if (isLocalPlayer)
             {
                 RoomManager.instance.SpawnPlayer();
-
                 RoomManager.instance.deaths++;
                 RoomManager.instance.SetHashes();
             }

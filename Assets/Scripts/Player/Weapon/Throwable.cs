@@ -37,20 +37,22 @@ public class Throwable : MonoBehaviourPun
 
     public void ThrowWeapon()
     {
-        // 자신의 캐릭터에서만 실행되도록 체크 (다른 플레이어 입력 방지)
         if (!photonView.IsMine) return;
 
         Vector3 spawnPos = throwPoint.position;
         Quaternion spawnRot = Quaternion.LookRotation(transform.forward);
 
-        // 네트워크에 생성 요청 (모든 클라이언트에 자동 동기화)
-        GameObject currentThrowable = PhotonNetwork.Instantiate(currentPrefab.name, spawnPos, spawnRot);
+        PlayerBuff buff = GetComponentInParent<PlayerBuff>();
+        bool homing = buff != null && buff.IsBuffed;
 
-        // 생성된 무기에 힘을 가해 날리기
+        object[] data = new object[] { homing };
+
+        GameObject currentThrowable = PhotonNetwork.Instantiate(currentPrefab.name, spawnPos, spawnRot, 0, data);
+
         Rigidbody rb = currentThrowable.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.angularVelocity = currentThrowable.transform.right * rotationSpeed; 
+            rb.angularVelocity = currentThrowable.transform.right * rotationSpeed;
             rb.AddForce(camera.transform.forward * throwForce, ForceMode.VelocityChange);
         }
     }
