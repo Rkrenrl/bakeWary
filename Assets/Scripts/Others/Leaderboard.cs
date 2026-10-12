@@ -3,6 +3,8 @@ using System.Linq;
 using Photon.Pun;
 using TMPro;
 using Photon.Pun.UtilityScripts;
+using Photon.Realtime;
+using UnityEngine.UI;
 
 public class Leaderboard : MonoBehaviour
 {
@@ -53,12 +55,17 @@ public class Leaderboard : MonoBehaviour
                 KDTexts[i].text = "0/0";
             }
 
+            slots[i].GetComponent<Image>().color = 
+                RoomManager.instance.GetTeam(player) == Team.Brown ? 
+                new Color(195, 137, 78) : new Color(255,255,255);
+            
+
             i++;
         }
     }
 
     void Update()
     {
-        playersHolder.SetActive(Input.GetKey(KeyCode.Tab)); 
+        playersHolder.SetActive(Input.GetKey(KeyCode.Tab));
     }
 }

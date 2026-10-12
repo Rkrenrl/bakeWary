@@ -3,8 +3,6 @@ using Photon.Pun;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine.SocialPlatforms;
-using Unity.VisualScripting;
 
 public enum Team
 {
@@ -83,7 +81,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         SpawnPlayer();
     }
 
-    Team GetTeam(Photon.Realtime.Player player)
+    public Team GetTeam(Photon.Realtime.Player player)
     {
         if (player.CustomProperties.TryGetValue("team", out object value))
         {
@@ -147,6 +145,30 @@ public class RoomManager : MonoBehaviourPunCallbacks
             upgradeRequireXP *= 1.5f;
             SetHashes(); // 이것만 있으면 됨. 모든 클라이언트에 자동으로 전파됨
         }
+    }
+
+    public int GetTeamScore(Team team)
+    {
+        string key = team == Team.White ? "whiteScore" : "brownScore";
+
+        if (PhotonNetwork.CurrentRoom != null &&
+            PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(key, out object value))
+        {
+            return (int)value;
+        }
+
+        return 0; // 아직 한 번도 설정 안 됐으면 기본값 0
+    }
+
+    public void AddTeamScore(Team team, int amount)
+    {
+        string key = team == Team.White ? "whiteScore" : "brownScore";
+        int newValue = GetTeamScore(team) + amount;
+
+        Hashtable hash = new Hashtable();
+        hash[key] = newValue;
+
+        PhotonNetwork.CurrentRoom.SetCustomProperties(hash);
     }
 
     public void SetHashes()

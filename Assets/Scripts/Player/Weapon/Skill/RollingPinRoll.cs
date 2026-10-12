@@ -173,6 +173,7 @@ public class RollingPinRoll : MonoBehaviourPun
             if (damage >= health.health)
             {
                 RoomManager.instance.kills++;
+                RoomManager.instance.AddTeamScore(RoomManager.instance.myTeam, 1);
                 RoomManager.instance.AddUpgradingXP(100);
                 RoomManager.instance.SetHashes();
                 PhotonNetwork.LocalPlayer.AddScore(100);

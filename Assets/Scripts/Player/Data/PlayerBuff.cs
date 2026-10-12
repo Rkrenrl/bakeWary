@@ -108,6 +108,7 @@ public class PlayerBuff : MonoBehaviourPun
             if (tornadoTickDamage >= health.health)
             {
                 RoomManager.instance.kills++;
+                RoomManager.instance.AddTeamScore(RoomManager.instance.myTeam, 1);
                 RoomManager.instance.AddUpgradingXP(100);
                 RoomManager.instance.SetHashes();
             }

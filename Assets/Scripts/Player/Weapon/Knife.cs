@@ -75,6 +75,7 @@ public class Knife : MonoBehaviour
                     if(damage >= hit.transform.gameObject.GetComponent<Health>().health)
                     {
                         RoomManager.instance.kills++;
+                        RoomManager.instance.AddTeamScore(RoomManager.instance.myTeam, 1);
                         RoomManager.instance.AddUpgradingXP(100); // PlayerStat.instance 대신 여기로
                         RoomManager.instance.SetHashes();
                         PhotonNetwork.LocalPlayer.AddScore(100);
