@@ -13,7 +13,9 @@ public class RoomList : MonoBehaviourPunCallbacks
 
     public GameObject roomManagerGameobject;
     public RoomManager roomManager;
-    public GameObject LobbyCamera;
+
+    public GameObject GameSelect;
+    public GameObject TeamSelect;
 
     [Header("UI")]
     public Transform roomListParent;
@@ -99,7 +101,8 @@ public class RoomList : MonoBehaviourPunCallbacks
     {
         roomManager.roomNameToJoin = _name;
         roomManagerGameobject.SetActive(true);
-        LobbyCamera.SetActive(false);
         roomManager.JoinRoomButtonPressed();
+        GameSelect.SetActive(false);
+        TeamSelect.SetActive(true);
     }
 }

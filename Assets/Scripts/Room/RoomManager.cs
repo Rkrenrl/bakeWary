@@ -1,6 +1,17 @@
 using UnityEngine;
 using Photon.Pun;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SocialPlatforms;
+using Unity.VisualScripting;
+
+public enum Team
+{
+    Brown,
+    White,
+    None
+}
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -13,6 +24,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     [Space]
     public GameObject roomCam;
+    public GameObject UIcam;
 
     [Space]
     public GameObject connectingUI;
@@ -34,6 +46,62 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public string roomNameToJoin = "Unnamed";
 
+    [Space]
+    public GameObject localPlayerInstance;
+
+    [Header("Team")]
+    public Team myTeam;
+
+    public TextMeshProUGUI brownTeamCount;
+    public TextMeshProUGUI whiteTeamCount;
+    public Button brownTeamButton;
+    public Button whiteTeamButton;
+    public Image teamLocked;
+
+    public void SetTeam(Team team)
+    {
+        myTeam = team;
+        SetHashes(); // 기존 SetHashes()가 CustomProperties를 갱신하므로, 거기에 팀 정보도 같이 실어 보냄
+    }
+
+    // public void TeamSet_None()
+    // {
+    //     SetTeam(Team.None);
+    // }
+
+    public void TeamSet_Brown()
+    {
+        SetTeam(Team.Brown);
+        UIcam.SetActive(false);
+        SpawnPlayer();
+    }
+
+    public void TeamSet_White()
+    {
+        SetTeam(Team.White);
+        UIcam.SetActive(false);
+        SpawnPlayer();
+    }
+
+    Team GetTeam(Photon.Realtime.Player player)
+    {
+        if (player.CustomProperties.TryGetValue("team", out object value))
+        {
+            return (Team)(int)value;
+        }
+        return Team.White; // 아직 선택 안 했을 때의 기본값
+    }
+
+    int CountTeam(Team team)
+    {
+        int count = 0;
+        foreach (var p in PhotonNetwork.PlayerList)
+        {
+            if (GetTeam(p) == team) count++;
+        }
+        return count;
+    }
+
     void Awake()
     {
         instance = this;
@@ -43,6 +111,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.JoinOrCreateRoom(roomNameToJoin, null, null);
         nickname = FirebaseManager.instance.username;
+        SetTeam(Team.None);
         connectingUI.SetActive(true);
     }
 
@@ -50,11 +119,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
         Debug.Log("We're connected and in a room now");
-        roomCam.SetActive(false); 
-        SpawnPlayer();
+        connectingUI.SetActive(false);
     }
-
-    public GameObject localPlayerInstance;
 
     public void SpawnPlayer()
     {
@@ -91,8 +157,31 @@ public class RoomManager : MonoBehaviourPunCallbacks
             hash["kills"] = kills;
             hash["deaths"] = deaths;
             hash["upgradingLevel"] = upgradingLevel;
+            hash["team"] = (int)myTeam; // 추가
+
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }
         catch { }
+    }
+
+    void Update()
+    {
+        brownTeamCount.text = "Players:"+CountTeam(Team.Brown).ToString();
+        whiteTeamCount.text = "Players:"+CountTeam(Team.White).ToString();
+        teamLocked.gameObject.SetActive(false);
+
+        if(CountTeam(Team.Brown) > CountTeam(Team.White))
+        {
+            teamLocked.gameObject.SetActive(true);
+            teamLocked.transform.position = brownTeamButton.transform.position;
+            brownTeamButton.gameObject.SetActive(false);
+        }
+
+        if(CountTeam(Team.Brown) < CountTeam(Team.White))
+        {
+            teamLocked.gameObject.SetActive(true);
+            teamLocked.transform.position = whiteTeamButton.transform.position;
+            whiteTeamButton.gameObject.SetActive(false);
+        }
     }
 }
