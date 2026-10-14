@@ -1221,7 +1221,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -1718,7 +1718,7 @@ Animation:
   m_GameObject: {fileID: 4042669889727701619}
   m_Enabled: 1
   serializedVersion: 4
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: e55898d72889db348b2e3f42f2fe6688, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 72b6f9ee7c6e6524d83dee3f806f417e, type: 2}
   - {fileID: 7400000, guid: e55898d72889db348b2e3f42f2fe6688, type: 2}
