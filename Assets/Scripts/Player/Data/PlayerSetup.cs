@@ -10,6 +10,8 @@ public class PlayerSetup : MonoBehaviourPun
     public TextMeshPro nicknameText;
     public Transform TPweaponHolder;
 
+    public Transform bodyModelRoot; // base 모델의 루트 (인스펙터에서 연결)
+
     private int lastUpgradingLevel = -1;
 
     public void IsLocalPlayer()
@@ -18,7 +20,23 @@ public class PlayerSetup : MonoBehaviourPun
         movement.enabled = true;
         camera.SetActive(true);
         nicknameText.gameObject.SetActive(false);
+
+        // 오직 "진짜 내 캐릭터"일 때만, 이 인스턴스에 한해서 레이어를 바꿈
+        SetLayerRecursively(bodyModelRoot, LayerMask.NameToLayer("Player Model"));
     }
+
+    void SetLayerRecursively(Transform root, int layer)
+    {
+        if (root == null) return;
+
+        root.gameObject.layer = layer;
+        foreach (Transform child in root)
+        {
+            SetLayerRecursively(child, layer);
+        }
+    }
+
+    
 
     void Update()
     {

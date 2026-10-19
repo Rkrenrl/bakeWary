@@ -6536,7 +6536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e60c3faa05e730a48942bacd6705acee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomManager
-  player: {fileID: 4437463118909186052, guid: ac613e44a1de69f43a0a29c268e6d5c3, type: 3}
+  player: {fileID: 8909252401780923478, guid: 8183cb58076afe049905acbe19f2be35, type: 3}
   spawnPoints:
   - {fileID: 296080007}
   roomCam: {fileID: 1782231743}

@@ -3,34 +3,44 @@ using UnityEngine;
 public class PlayerAnimationController : MonoBehaviour
 {
     [Header("Animation")]
-    public Animation anim;           // base 모델에 붙은 Animation 컴포넌트
+    public Animation anim;
     public AnimationClip idleClip;
     public AnimationClip runClip;
 
     [Header("Movement Reference")]
-    public Rigidbody rb;             // 캐릭터 루트의 Rigidbody
     public float moveThreshold = 0.5f;
     public float fadeTime = 0.15f;
 
     private bool isRunning = false;
+    private Vector3 lastPosition;
 
     void Start()
     {
+        anim.cullingType = AnimationCullingType.AlwaysAnimate;
+
+        Debug.Log($"[Anim] idleClip={idleClip}, runClip={runClip}"); // 추가
+
         anim.AddClip(idleClip, "Idle");
         anim.AddClip(runClip, "Run");
         anim.Play("Idle");
+
+        lastPosition = transform.position;
     }
 
     void Update()
     {
-        Vector3 flatVelocity = rb.linearVelocity;
-        flatVelocity.y = 0f; // 점프/낙하/공중부양 중 수직 속도는 무시하고 수평 이동만 체크
+        Vector3 delta = transform.position - lastPosition;
+        delta.y = 0f;
 
-        bool shouldRun = flatVelocity.magnitude > moveThreshold;
+        float currentSpeed = delta.magnitude / Time.deltaTime;
+        lastPosition = transform.position;
+
+        bool shouldRun = currentSpeed > moveThreshold;
 
         if (shouldRun != isRunning)
         {
             isRunning = shouldRun;
+            Debug.Log($"[Anim] 전환 시도: {(isRunning ? "Run" : "Idle")}"); // 추가
             anim.CrossFade(isRunning ? "Run" : "Idle", fadeTime);
         }
     }
