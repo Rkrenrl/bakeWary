@@ -21,7 +21,9 @@ public class PlayerSetup : MonoBehaviourPun
         camera.SetActive(true);
         nicknameText.gameObject.SetActive(false);
 
-        // 오직 "진짜 내 캐릭터"일 때만, 이 인스턴스에 한해서 레이어를 바꿈
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null) rb.isKinematic = false; // 오직 "진짜 내 캐릭터"만 물리 시뮬레이션 켬
+
         SetLayerRecursively(bodyModelRoot, LayerMask.NameToLayer("Player Model"));
     }
 
