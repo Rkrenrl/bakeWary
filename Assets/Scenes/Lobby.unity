@@ -2724,7 +2724,7 @@ GameObject:
   - component: {fileID: 296080005}
   - component: {fileID: 296080004}
   m_Layer: 0
-  m_Name: SpawnPoint
+  m_Name: WhiteSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4633,7 +4633,7 @@ GameObject:
   - component: {fileID: 549633330}
   - component: {fileID: 549633329}
   m_Layer: 0
-  m_Name: SpawnPoint (1)
+  m_Name: BrownSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6537,8 +6537,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomManager
   player: {fileID: 8909252401780923478, guid: 8183cb58076afe049905acbe19f2be35, type: 3}
-  spawnPoints:
-  - {fileID: 296080007}
+  brownSpawn: {fileID: 549633332}
+  whiteSpawn: {fileID: 296080007}
   roomCam: {fileID: 1782231743}
   UIcam: {fileID: 1687918028}
   connectingUI: {fileID: 893223765}

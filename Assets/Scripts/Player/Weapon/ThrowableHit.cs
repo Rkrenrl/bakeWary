@@ -95,16 +95,7 @@ public class ThrowableHit : MonoBehaviourPun
 
                 PhotonNetwork.LocalPlayer.AddScore(damage);
 
-                if(damage >= other.GetComponent<Health>().health)
-                {
-                    RoomManager.instance.kills++;
-                    RoomManager.instance.AddTeamScore(RoomManager.instance.myTeam, 1);
-                    RoomManager.instance.AddUpgradingXP(100); // PlayerStat.instance 대신 여기로
-                    RoomManager.instance.SetHashes();
-                    PhotonNetwork.LocalPlayer.AddScore(100);
-                }
-
-                otherView.RPC("TakeDamage", RpcTarget.All, damage); // 기존 그대로, 넉백 없음
+                otherView.RPC("TakeDamage", RpcTarget.All, damage, photonView.Owner.ActorNumber);
 
                 PhotonNetwork.Instantiate(hitVFX.name, transform.position, Quaternion.identity);
                 PhotonNetwork.Destroy(gameObject);

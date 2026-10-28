@@ -113,7 +113,7 @@ public class PlayerBuff : MonoBehaviourPun
                 RoomManager.instance.SetHashes();
             }
 
-            otherView.RPC("TakeDamage", RpcTarget.All, tornadoTickDamage);
+            otherView.RPC("TakeDamage", RpcTarget.All, tornadoTickDamage, photonView.Owner.ActorNumber);
         }
     }
 

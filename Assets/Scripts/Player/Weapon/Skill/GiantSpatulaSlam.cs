@@ -98,16 +98,7 @@ public class GiantSpatulaSlam : MonoBehaviourPun
 
             PhotonNetwork.LocalPlayer.AddScore(damage);
 
-            if (damage >= health.health)
-            {
-                RoomManager.instance.kills++;
-                RoomManager.instance.AddTeamScore(RoomManager.instance.myTeam, 1);
-                RoomManager.instance.AddUpgradingXP(100);
-                RoomManager.instance.SetHashes();
-                PhotonNetwork.LocalPlayer.AddScore(100);
-            }
-
-            otherView.RPC("TakeDamage", RpcTarget.All, damage);
+            otherView.RPC("TakeDamage", RpcTarget.All, damage, photonView.Owner.ActorNumber);
         }
     }
     

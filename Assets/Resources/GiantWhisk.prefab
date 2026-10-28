@@ -126,3 +126,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a77261df66f6a0b4da66f37d2611a819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WhiskSpin
+  spinSpeed: 720
+  tiltAngle: 35

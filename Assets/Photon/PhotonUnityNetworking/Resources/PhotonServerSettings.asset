@@ -49,6 +49,7 @@ MonoBehaviour:
   - SetFloatVFX
   - SetBuff
   - SetTornadoVFX
+  - AwardKill
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

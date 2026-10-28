@@ -61,7 +61,7 @@ public class Knife : MonoBehaviour
 
         RaycastHit hit;
 
-        if(Physics.Raycast(ray.origin, ray.direction, out hit, 1f))
+        if(Physics.Raycast(ray.origin, ray.direction, out hit, 2f))
         {
             if(hit.transform.position.x != camera.transform.position.x && 
                 hit.transform.position.z != camera.transform.position.z)
@@ -72,16 +72,7 @@ public class Knife : MonoBehaviour
                 {
                     PhotonNetwork.LocalPlayer.AddScore(damage);
 
-                    if(damage >= hit.transform.gameObject.GetComponent<Health>().health)
-                    {
-                        RoomManager.instance.kills++;
-                        RoomManager.instance.AddTeamScore(RoomManager.instance.myTeam, 1);
-                        RoomManager.instance.AddUpgradingXP(100); // PlayerStat.instance 대신 여기로
-                        RoomManager.instance.SetHashes();
-                        PhotonNetwork.LocalPlayer.AddScore(100);
-                    }
-
-                    hit.transform.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, damage); // 기존 그대로, 넉백 없음
+                    hit.transform.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, damage, PhotonNetwork.LocalPlayer.ActorNumber);
                 }
             }
         }

@@ -18,7 +18,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public GameObject player;
 
     [Space]
-    public Transform[] spawnPoints;
+    public Transform brownSpawn;
+    public Transform whiteSpawn;
 
     [Space]
     public GameObject roomCam;
@@ -122,7 +123,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public void SpawnPlayer()
     {
-        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        Transform spawnPoint = myTeam == Team.Brown ? brownSpawn : whiteSpawn;
         
         GameObject _player = PhotonNetwork.Instantiate(player.name, spawnPoint.position, Quaternion.identity);
         _player.GetComponent<PlayerSetup>().IsLocalPlayer();
