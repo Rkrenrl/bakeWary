@@ -20,6 +20,11 @@ public class Knife : MonoBehaviour
     [Header("SFX")]
     public PlayerPhotonSoundManager playerPhotonSoundManager;
 
+    [Header("Slash VFX")]
+    public GameObject slashVFX;                           // Resources 폴더의 프리팹
+    public float slashDistance = 1f;                      // 카메라 앞 몇 m에 띄울지
+    public float[] slashRollAngles = { 10f, -10f,};   // 콤보 순서별 베는 각도
+
     [Space]
     public int damage = 75;
 
@@ -57,6 +62,8 @@ public class Knife : MonoBehaviour
     {
         playerPhotonSoundManager.PlayKnifeSFX();
 
+        SpawnSlashVFX();
+
         Ray ray = new Ray(camera.transform.position, camera.transform.forward);
 
         RaycastHit hit;
@@ -76,6 +83,23 @@ public class Knife : MonoBehaviour
                 }
             }
         }
+    }
+
+    void SpawnSlashVFX()
+    {
+        if (slashVFX == null) return;
+
+        Transform cam = camera.transform;
+        Vector3 pos = cam.position + cam.forward * slashDistance - new Vector3(0,0.3f,0);
+
+        // 콤보 순서마다 비스듬한 각도를 달리해서 매번 다른 방향으로 베는 느낌을 줌
+        float roll = slashRollAngles.Length > 0
+            ? slashRollAngles[attackOrder % slashRollAngles.Length]
+            : 0f;
+
+        Quaternion rot = cam.rotation * Quaternion.Euler(90, 180, roll);
+
+        PhotonNetwork.Instantiate(slashVFX.name, pos, rot);
     }
 
    IEnumerator AttackMotion()

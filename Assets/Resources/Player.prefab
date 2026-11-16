@@ -298,7 +298,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6677925865968472787
 Transform:
   m_ObjectHideFlags: 0
@@ -2209,7 +2209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5373395169500426718
 Transform:
   m_ObjectHideFlags: 0
@@ -3079,7 +3079,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8909252401780923478}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -3273,6 +3273,7 @@ MonoBehaviour:
   nickname: 
   nicknameText: {fileID: 4443492143927225115}
   TPweaponHolder: {fileID: 9208426693279651263}
+  bodyModelRoot: {fileID: 0}
 --- !u!135 &2857126988594958982
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4366,7 +4367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 596e9421cd9578347a5fa75bcda2a506, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 947893824491286803, guid: 596e9421cd9578347a5fa75bcda2a506, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

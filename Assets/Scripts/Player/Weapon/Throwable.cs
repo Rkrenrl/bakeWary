@@ -29,9 +29,9 @@ public class Throwable : MonoBehaviourPun
         int index = Mathf.Clamp(upgradingLevel - 1, 0, ThrowablePrefabs.Count - 1);
         currentPrefab = ThrowablePrefabs[index];
 
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < transform.GetChild(0).childCount - 2; i++)
         {
-            transform.GetChild(i).gameObject.SetActive(i == index);
+            transform.GetChild(0).GetChild(i).gameObject.SetActive(i == index);
         }
     }
 
