@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class DropMaterials : MonoBehaviour
 {
-    List<GameObject> materialsPrefab;
+    public List<GameObject> materialsPrefab;
     public GameObject SpawnDetector;
 
     GameObject detectorPrefab;
@@ -16,14 +16,25 @@ public class DropMaterials : MonoBehaviour
 
         StartCoroutine(DropCycle());
     }
-
-
     void MoveDetector()
     {
         Vector3 detectingSpawnPosition = 
-            new Vector3(Random.Range(-60, 170), 0, Random.Range(-60, 300));
+            new Vector3(Random.Range(-60, 170), 90, Random.Range(-60, 300));
         
         detectorPrefab.transform.position = detectingSpawnPosition;
+    }
+
+    void DropMaterial()
+    {
+        GameObject drop = PhotonNetwork.Instantiate
+            (materialsPrefab[Random.Range(0, materialsPrefab.Count)].name,
+            detectorPrefab.transform.position, Quaternion.identity);
+
+        while(!drop.GetComponent<MaterialManager>().isGround)
+        {
+            detectorPrefab.transform.GetChild(0).gameObject.SetActive(true);
+        }
+        detectorPrefab.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     IEnumerator DropCycle()
@@ -40,7 +51,9 @@ public class DropMaterials : MonoBehaviour
                 MoveDetector();
             }
             
-            
+            DropMaterial();
+
+            MoveDetector();
         }
     }
 }
